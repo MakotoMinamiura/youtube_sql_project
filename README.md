@@ -43,7 +43,187 @@ The dataset is a mock version of Netflix-format data customized for YouTube-styl
 
 ## 📖 Business Problems and SQL Solutions / ビジネス問題とSQL解決
 
-...(前略)...
+# 🎥 YouTube Movies and TV Shows Data Analysis with SQL
+
+This project presents a comprehensive SQL-based analysis of YouTube-style content data (similar to Netflix), aiming to address real-world business questions and improve data handling skills. Each SQL query is accompanied by a clear business problem statement and Japanese translation.
+
+---
+
+## 📖 Business Problems and SQL Solutions / ビジネス問題とSQL解決
+
+### 1. Count the number of Movies and TV Shows
+**JP:** 映画とテレビ番組の数をそれぞれ数えなさい
+```sql
+SELECT type, COUNT(*) AS total_content
+FROM youtube
+GROUP BY type;
+```
+
+### 2. Count the number of nations
+**JP:** 国の数を数えなさい
+```sql
+SELECT 
+  TRIM(country_clean) AS country,
+  COUNT(*) AS total_content
+FROM (
+  SELECT UNNEST(STRING_TO_ARRAY(country, ',')) AS country_clean
+  FROM youtube
+  WHERE country IS NOT NULL
+) AS sub
+GROUP BY TRIM(country_clean)
+ORDER BY total_content DESC;
+```
+
+### 3. Find the most common rating for movies and TV shows
+**JP:** 映画とテレビ番組の中で最も多い評価を見つけなさい
+```sql
+SELECT 
+    type,
+    rating
+FROM (
+    SELECT 
+        type,
+        rating,
+        COUNT(*),
+        RANK() OVER (PARTITION BY type ORDER BY COUNT(*) DESC) AS ranking
+    FROM youtube
+    GROUP BY type, rating
+) AS sub
+WHERE ranking = 1;
+```
+
+### 4. Find the top 3 ratings for movies and TV shows
+**JP:** 映画とテレビ番組の中で最も多い評価のトップ3を見つけなさい
+```sql
+SELECT 
+    type,
+    rating
+FROM (
+    SELECT 
+        type,
+        rating,
+        COUNT(*),
+        RANK() OVER (PARTITION BY type ORDER BY COUNT(*) DESC) AS ranking
+    FROM youtube
+    GROUP BY type, rating
+) AS sub
+WHERE ranking <= 3
+ORDER BY type, rating;
+```
+
+### 5. List all movies released in 2020
+**JP:** 2020年にリリースされた映画をすべて一覧にしなさい
+```sql
+SELECT * FROM youtube
+WHERE type = 'Movie' AND release_year = 2020;
+```
+
+### 6. List all TV Shows released in 2021
+**JP:** 2021年にリリースされたテレビ番組をすべて一覧にしなさい
+```sql
+SELECT * FROM youtube
+WHERE type = 'TV Show' AND release_year = 2021;
+```
+
+### 7. Top 5 countries with most content
+**JP:** YouTubeで最も多くのコンテンツを提供している国トップ5を見つけなさい
+```sql
+SELECT 
+    UNNEST(STRING_TO_ARRAY(country, ',')) AS new_country,
+    COUNT(show_id) AS total_content
+FROM youtube
+GROUP BY 1
+ORDER BY 2 DESC
+LIMIT 5;
+```
+
+### 8. Top 5 countries with least content
+**JP:** YouTubeで最も少ないコンテンツを提供している国トップ5を見つけなさい
+```sql
+SELECT 
+    UNNEST(STRING_TO_ARRAY(country, ',')) AS new_country,
+    COUNT(show_id) AS total_content
+FROM youtube
+GROUP BY 1
+ORDER BY 2 ASC
+LIMIT 5;
+```
+
+### 9. Identify the longest movie
+**JP:** 最も長い映画を特定しなさい
+```sql
+SELECT * FROM youtube
+WHERE type = 'Movie'
+  AND duration LIKE '%min'
+  AND CAST(SPLIT_PART(duration, ' ', 1) AS INT) = (
+    SELECT MAX(CAST(SPLIT_PART(duration, ' ', 1) AS INT))
+    FROM youtube
+    WHERE type = 'Movie' AND duration LIKE '%min'
+);
+```
+
+### 10. Identify the second longest movie
+**JP:** 二番目に長い映画を特定しなさい
+```sql
+SELECT * FROM youtube
+WHERE type = 'Movie'
+  AND duration LIKE '%min'
+  AND CAST(SPLIT_PART(duration, ' ', 1) AS INT) = (
+    SELECT MAX(duration_int)
+    FROM (
+        SELECT DISTINCT CAST(SPLIT_PART(duration, ' ', 1) AS INT) AS duration_int
+        FROM youtube
+        WHERE type = 'Movie' AND duration LIKE '%min'
+    ) AS sub
+    WHERE duration_int < (
+        SELECT MAX(CAST(SPLIT_PART(duration, ' ', 1) AS INT))
+        FROM youtube
+        WHERE type = 'Movie' AND duration LIKE '%min'
+    )
+);
+```
+
+### 11. Identify the longest movies based on the national name
+**JP:** 国別に最長の映画を特定しなさい
+```sql
+SELECT
+  country_clean,
+  title,
+  duration
+FROM (
+  SELECT
+    title,
+    TRIM(UNNEST(STRING_TO_ARRAY(country, ','))) AS country_clean,
+    duration,
+    CAST(SPLIT_PART(duration, ' ', 1) AS INT) AS duration_min,
+    RANK() OVER (
+      PARTITION BY TRIM(UNNEST(STRING_TO_ARRAY(country, ',')))
+      ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC
+    ) AS ranking
+  FROM youtube
+  WHERE type = 'Movie' AND duration LIKE '%min'
+) AS ranked_movies
+WHERE ranking = 1;
+```
+
+### 12. Find content added in the last 5 years
+**JP:** ここ5年間で追加されたコンテンツを見つけなさい
+```sql
+SELECT * 
+FROM youtube
+WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years';
+```
+
+### 13. Find content added in the first 3 years
+**JP:** 最初の3年間で追加されたコンテンツを見つけなさい
+```sql
+SELECT *
+FROM youtube
+WHERE TO_DATE(date_added, 'Month DD, YYYY') BETWEEN
+  (SELECT MIN(TO_DATE(date_added, 'Month DD, YYYY')) FROM youtube)
+  AND
+  (SELECT MIN(TO_DATE(date_added, 'Month DD, YYYY')) FROM youtube) + INTERVAL '3 years';
+```
 
 ### 14. Find all the movies/TV shows by director 'Rajiv Chilaka'
 **日本語訳:** 'Rajiv Chilaka'監督の映画およびテレビ番組をすべて見つけなさい
