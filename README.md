@@ -333,7 +333,50 @@ SELECT
 FROM new_table
 GROUP BY category;
 ```
+## 🧠 Findings and Conclusions / 調査結果と結論
 
+This project analyzes YouTube-style streaming data using advanced SQL queries. The key insights and conclusions derived from the analysis are as follows:  
+本プロジェクトは、YouTube風のストリーミングデータを高度なSQLクエリで分析しています。以下は分析から得られた主な洞察と結論です。
+
+1. **Content Type Distribution / コンテンツ種別の分布**  
+   Movies are more prevalent than TV Shows on the platform, indicating a stronger focus on film content rather than episodic series.  
+   このプラットフォームでは、テレビ番組よりも映画の方が多く、シリーズ作品よりも映画に重きを置いていることが分かります。
+
+2. **Top Ratings by Content Type / コンテンツ種別ごとの最多レーティング**  
+   The most frequent ratings vary by type, but overall, 'TV-MA' and 'TV-14' appear frequently, suggesting a target audience of teenagers and adults.  
+   種別ごとに評価の傾向は異なりますが、全体的に「TV-MA」と「TV-14」が多く、ティーンや大人を主なターゲットにしていることが示唆されます。
+
+3. **Release Trends / リリース傾向**  
+   Most content was released between 2015 and 2020, indicating rapid growth in recent years and a potential peak in production during that period.  
+   コンテンツの多くは2015年から2020年にかけて公開されており、近年急速に成長し、この期間にピークを迎えた可能性があります。
+
+4. **Dominant Content-Producing Countries / コンテンツ制作国の傾向**  
+   The United States is the leading content producer, followed by India and the United Kingdom. However, several shows and movies come from multi-country collaborations.  
+   アメリカが最も多くのコンテンツを制作しており、次いでインドとイギリスが続きます。多国籍の協力による作品も多数存在します。
+
+5. **Longest Duration Content / 最長時間コンテンツ**  
+   Some movies extend well beyond standard lengths, with durations exceeding 200 minutes, possibly indicating special editions or documentaries.  
+   映画の中には200分を超える長編作品もあり、特別版やドキュメンタリーの可能性があります。
+
+6. **Recent Additions / 最近の追加作品**  
+   A significant portion of content was added in the last 5 years, showcasing an active expansion of the content library.  
+   過去5年間で追加されたコンテンツが多く、積極的にライブラリを拡充していることが分かります。
+
+7. **Director-Specific Insights / 監督別の傾向**  
+   Directors like Rajiv Chilaka contribute heavily to the children's content genre, highlighting niches within the platform.  
+   Rajiv Chilakaのような監督は子ども向けコンテンツに大きく貢献しており、プラットフォーム内の特定ジャンルの存在が明らかになりました。
+
+8. **Genre Distribution / ジャンル分布**  
+   'Dramas', 'Comedies', and 'Documentaries' are the most common genres, suggesting high user engagement in both fictional storytelling and real-world narratives.  
+   「ドラマ」「コメディ」「ドキュメンタリー」が最も多く、フィクションと現実の物語の両方に高い関心があることを示しています。
+
+9. **High-Volume Contributors / 大量制作の傾向**  
+   Some directors and production countries contribute disproportionately to the platform's catalog, indicating strategic partnerships or high output rates.  
+   一部の監督や国が非常に多くのコンテンツを提供しており、戦略的な提携や高い制作能力があると推察されます。
+
+10. **Content Categorization Challenges / コンテンツ分類の課題**  
+   Due to multi-valued fields (e.g., country, cast, listed_in), significant data cleaning and normalization were required to extract accurate insights.  
+   「country」「cast」「listed_in」などの複数値を持つフィールドがあり、正確な分析のためにデータのクレンジングと正規化が必要でした。
 
 
 
