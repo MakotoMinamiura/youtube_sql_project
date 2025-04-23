@@ -29,8 +29,8 @@ The goal is to extract insights and solve real-world business problems by using 
 ---
 
 ## 🗂️ Dataset  
-The dataset is a mock version of Netflix-format data customized for YouTube-style content.  
-データセットはNetflix形式を参考にした、YouTube風の架空データです。
+The dataset is a mock version of data customized for YouTube-style content.  
+データセットはYouTube風の架空データです。
 
 ---
 
@@ -52,7 +52,7 @@ This project presents a comprehensive SQL-based analysis of YouTube-style conten
 ## 📖 Business Problems and SQL Solutions / ビジネス問題とSQL解決
 
 ### 1. Count the number of Movies and TV Shows
-**JP:** 映画とテレビ番組の数をそれぞれ数えなさい
+**日本語訳:** 映画とテレビ番組の数をそれぞれ数えなさい
 ```sql
 SELECT type, COUNT(*) AS total_content
 FROM youtube
@@ -60,7 +60,7 @@ GROUP BY type;
 ```
 
 ### 2. Count the number of nations
-**JP:** 国の数を数えなさい
+**日本語訳:** 国の数を数えなさい
 ```sql
 SELECT 
   TRIM(country_clean) AS country,
@@ -75,7 +75,7 @@ ORDER BY total_content DESC;
 ```
 
 ### 3. Find the most common rating for movies and TV shows
-**JP:** 映画とテレビ番組の中で最も多い評価を見つけなさい
+**日本語訳:** 映画とテレビ番組の中で最も多い評価を見つけなさい
 ```sql
 SELECT 
     type,
@@ -93,7 +93,7 @@ WHERE ranking = 1;
 ```
 
 ### 4. Find the top 3 ratings for movies and TV shows
-**JP:** 映画とテレビ番組の中で最も多い評価のトップ3を見つけなさい
+**日本語訳:** 映画とテレビ番組の中で最も多い評価のトップ3を見つけなさい
 ```sql
 SELECT 
     type,
@@ -112,21 +112,21 @@ ORDER BY type, rating;
 ```
 
 ### 5. List all movies released in 2020
-**JP:** 2020年にリリースされた映画をすべて一覧にしなさい
+**日本語訳:** 2020年にリリースされた映画をすべて一覧にしなさい
 ```sql
 SELECT * FROM youtube
 WHERE type = 'Movie' AND release_year = 2020;
 ```
 
 ### 6. List all TV Shows released in 2021
-**JP:** 2021年にリリースされたテレビ番組をすべて一覧にしなさい
+**日本語訳:** 2021年にリリースされたテレビ番組をすべて一覧にしなさい
 ```sql
 SELECT * FROM youtube
 WHERE type = 'TV Show' AND release_year = 2021;
 ```
 
 ### 7. Top 5 countries with most content
-**JP:** YouTubeで最も多くのコンテンツを提供している国トップ5を見つけなさい
+**日本語訳:** YouTubeで最も多くのコンテンツを提供している国トップ5を見つけなさい
 ```sql
 SELECT 
     UNNEST(STRING_TO_ARRAY(country, ',')) AS new_country,
@@ -138,7 +138,7 @@ LIMIT 5;
 ```
 
 ### 8. Top 5 countries with least content
-**JP:** YouTubeで最も少ないコンテンツを提供している国トップ5を見つけなさい
+**日本語訳:** YouTubeで最も少ないコンテンツを提供している国トップ5を見つけなさい
 ```sql
 SELECT 
     UNNEST(STRING_TO_ARRAY(country, ',')) AS new_country,
@@ -150,7 +150,7 @@ LIMIT 5;
 ```
 
 ### 9. Identify the longest movie
-**JP:** 最も長い映画を特定しなさい
+**日本語訳:** 最も長い映画を特定しなさい
 ```sql
 SELECT * FROM youtube
 WHERE type = 'Movie'
@@ -163,7 +163,7 @@ WHERE type = 'Movie'
 ```
 
 ### 10. Identify the second longest movie
-**JP:** 二番目に長い映画を特定しなさい
+**日本語訳:** 二番目に長い映画を特定しなさい
 ```sql
 SELECT * FROM youtube
 WHERE type = 'Movie'
@@ -184,7 +184,7 @@ WHERE type = 'Movie'
 ```
 
 ### 11. Identify the longest movies based on the national name
-**JP:** 国別に最長の映画を特定しなさい
+**日本語訳:** 国別に最長の映画を特定しなさい
 ```sql
 SELECT
   country_clean,
@@ -207,7 +207,7 @@ WHERE ranking = 1;
 ```
 
 ### 12. Find content added in the last 5 years
-**JP:** ここ5年間で追加されたコンテンツを見つけなさい
+**日本語訳:** ここ5年間で追加されたコンテンツを見つけなさい
 ```sql
 SELECT * 
 FROM youtube
@@ -215,7 +215,7 @@ WHERE TO_DATE(date_added, 'Month DD, YYYY') >= CURRENT_DATE - INTERVAL '5 years'
 ```
 
 ### 13. Find content added in the first 3 years
-**JP:** 最初の3年間で追加されたコンテンツを見つけなさい
+**日本語訳:** 最初の3年間で追加されたコンテンツを見つけなさい
 ```sql
 SELECT *
 FROM youtube
