@@ -31,14 +31,4 @@ The following README provides a detailed account of the project's objectives, bu
 
 ---
 
-## 📁 Dataset  
-**英語：**  
-The data for this project is sourced from a public dataset:  
-
-- 📎 **Dataset Link:** [YouTube Movies Dataset](#) *(← 必要に応じて実際のURLを記入)*
-
-**日本語訳：**  
-本プロジェクトで使用したデータは、公開されているYouTube風映画・番組データセットです：
-
-- 📎 **データセットリンク：** [YouTube 映画データセット](#) *(※実際のリンクに差し替えてください)*
 
