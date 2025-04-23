@@ -1,34 +1,53 @@
 # Youtube Movies and TV Shows Data Analysis using SQL
-(日本語訳：『SQLを用いたYoutube映画・動画のデータ分析』)
+(日本語訳：『SQLを用いたYoutube映画・テレビ番組のデータ分析』)
 
 ![YouTube Banner](https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg)
 
-## 📖 Overview  
-**英語：**  
-This project involves a comprehensive analysis of YouTube-style movies and TV shows data using SQL.  
-The goal is to extract valuable insights and answer various business questions based on the dataset.  
-The following README provides a detailed account of the project's objectives, business problems, solutions, findings, and conclusions.  
+---
 
-**日本語訳：**  
-このプロジェクトでは、YouTube風の映画とテレビ番組のデータをSQLで分析します。  
-目的は、データセットに基づく有益な洞察を抽出し、様々なビジネス上の問いに答えることです。  
-本READMEでは、プロジェクトの目的、課題、解決策、発見、結論について詳しく解説しています。
+## 📖 Overview  
+This project involves a comprehensive analysis of YouTube-style movie and TV show data using SQL.  
+The goal is to extract insights and solve real-world business problems by using SQL techniques such as aggregation, window functions, date processing, string manipulation, and conditional logic.  
+
+本プロジェクトは、YouTube風のデータを使ってSQLによる実践的なビジネス課題の分析を行うものです。集計・文字列処理・日付処理・条件分岐・ウィンドウ関数などのSQL技術を活用しています。
 
 ---
 
 ## 🎯 Objectives  
-**英語：**  
-- Analyze the distribution of content types (movies vs TV shows).  
-- Identify the most common ratings for movies and TV shows.  
-- List and analyze content based on release years, countries, and durations.  
-- Explore and categorize content based on specific criteria and keywords.  
+- Analyze distribution of Movies vs TV Shows  
+- Identify most frequent ratings  
+- Explore trends by country, year, genre, duration  
+- Filter by directors, actors, keywords  
+- Categorize content based on violent keywords  
 
-**日本語訳：**  
-- 映画とテレビ番組のタイプ別分布を分析する  
-- 最も一般的なレーティングを特定する  
-- リリース年、国、再生時間ごとにコンテンツを整理・分析する  
-- 特定の条件やキーワードに基づいて分類・探索する  
+- 映画とテレビ番組の比率を分析  
+- 最も多く使われるレーティングを特定  
+- 国・年・ジャンル・上映時間別の傾向を分析  
+- 監督・俳優・キーワードによるフィルタリング  
+- 暴力的キーワードの有無による作品分類
 
 ---
+
+## 🗂️ Dataset  
+The dataset is a mock version of Netflix-format data customized for YouTube-style content.  
+データセットはNetflix形式を参考にした、YouTube風の架空データです。
+
+---
+
+## 🔧 Technologies Used  
+- PostgreSQL  
+- SQL functions: `UNNEST`, `STRING_TO_ARRAY`, `SPLIT_PART`, `TO_DATE`, `CASE`, `RANK()`  
+- DBeaver (interface)
+
+---
+
+## 💡 Sample Business Questions & SQL Solutions
+
+### 1. Count the number of Movies and TV Shows  
+映画とテレビ番組の数を数える  
+```sql
+SELECT type, COUNT(*) AS total_content
+FROM youtube
+GROUP BY type;
 
 
