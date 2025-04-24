@@ -43,14 +43,6 @@ The dataset is a mock version of data customized for YouTube-style content.
 
 ## 📖 Business Problems and SQL Solutions / ビジネス問題とSQL解決
 
-# 🎥 YouTube Movies and TV Shows Data Analysis with SQL
-
-This project presents a comprehensive SQL-based analysis of YouTube-style content data (similar to Netflix), aiming to address real-world business questions and improve data handling skills. Each SQL query is accompanied by a clear business problem statement and Japanese translation.
-
----
-
-## 📖 Business Problems and SQL Solutions / ビジネス問題とSQL解決
-
 ### 1. Count the number of Movies and TV Shows
 **日本語訳:** 映画とテレビ番組の数をそれぞれ数えなさい
 ```sql
